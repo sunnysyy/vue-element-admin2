@@ -1,26 +1,32 @@
 <template>
   <div class="dashboard-editor-container">
-    <github-corner class="github-corner" />
 
     <panel-group @handleSetLineChartData="handleSetLineChartData" />
 
-    <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
-      <line-chart :chart-data="lineChartData" />
-    </el-row>
-
     <el-row :gutter="32">
-      <el-col :xs="24" :sm="24" :lg="8">
+      <el-col :xs="24" :sm="24" :lg="12">
         <div class="chart-wrapper">
-          <raddar-chart />
+          <div class="chart-title">客户增长数据</div>
+          <line-chart :chart-data="lineChartData" />
         </div>
       </el-col>
-      <el-col :xs="24" :sm="24" :lg="8">
+      <el-col :xs="24" :sm="24" :lg="12">
         <div class="chart-wrapper">
+          <div class="chart-title">订单增长数据</div>
+          <line-chart :chart-data="lineChartData" />
+          <!-- <raddar-chart /> -->
+        </div>
+      </el-col>
+      <el-col :xs="24" :sm="24" :lg="12">
+        <div class="chart-wrapper">
+          <div class="chart-title">小程序数据统计</div>
           <pie-chart />
+          <!-- <line-chart :chart-data="lineChartData" /> -->
         </div>
       </el-col>
-      <el-col :xs="24" :sm="24" :lg="8">
+      <el-col :xs="24" :sm="24" :lg="12">
         <div class="chart-wrapper">
+          <div class="chart-title">小程序支付金额</div>
           <bar-chart />
         </div>
       </el-col>
@@ -41,10 +47,8 @@
 </template>
 
 <script>
-import GithubCorner from '@/components/GithubCorner'
 import PanelGroup from './components/PanelGroup'
 import LineChart from './components/LineChart'
-import RaddarChart from './components/RaddarChart'
 import PieChart from './components/PieChart'
 import BarChart from './components/BarChart'
 import TransactionTable from './components/TransactionTable'
@@ -73,10 +77,8 @@ const lineChartData = {
 export default {
   name: 'DashboardAdmin',
   components: {
-    GithubCorner,
     PanelGroup,
     LineChart,
-    RaddarChart,
     PieChart,
     BarChart,
     TransactionTable,
@@ -98,21 +100,17 @@ export default {
 
 <style lang="scss" scoped>
 .dashboard-editor-container {
-  padding: 32px;
+  padding: 20px 32px 32px 32px;
   background-color: rgb(240, 242, 245);
   position: relative;
-
-  .github-corner {
-    position: absolute;
-    top: 0px;
-    border: 0;
-    right: 0;
-  }
 
   .chart-wrapper {
     background: #fff;
     padding: 16px 16px 0;
     margin-bottom: 32px;
+  }
+  .chart-title {
+    margin-bottom: 20px;
   }
 }
 

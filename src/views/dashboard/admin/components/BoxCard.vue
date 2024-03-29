@@ -7,19 +7,19 @@
       <pan-thumb :image="avatar" class="panThumb" />
       <mallki class-name="mallki-text" text="vue-element-admin" />
       <div style="padding-top:35px;" class="progress-item">
-        <span>Vue</span>
+        <span>碱水面包</span>
         <el-progress :percentage="70" />
       </div>
       <div class="progress-item">
-        <span>JavaScript</span>
+        <span>吐司</span>
         <el-progress :percentage="18" />
       </div>
       <div class="progress-item">
-        <span>CSS</span>
+        <span>红豆面包</span>
         <el-progress :percentage="12" />
       </div>
       <div class="progress-item">
-        <span>ESLint</span>
+        <span>芋泥面包</span>
         <el-progress :percentage="100" status="success" />
       </div>
     </div>

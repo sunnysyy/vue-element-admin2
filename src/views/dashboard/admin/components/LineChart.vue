@@ -20,7 +20,7 @@ export default {
     },
     height: {
       type: String,
-      default: '350px'
+      default: '300px'
     },
     autoResize: {
       type: Boolean,
@@ -89,11 +89,11 @@ export default {
             show: false
           }
         },
-        legend: {
-          data: ['expected', 'actual']
-        },
+        // legend: {
+        //   data: ['expected', 'actual']
+        // },
         series: [{
-          name: 'expected', itemStyle: {
+          name: '增长数据', itemStyle: {
             normal: {
               color: '#FF005A',
               lineStyle: {
@@ -102,32 +102,33 @@ export default {
               }
             }
           },
-          smooth: true,
+          // smooth: true,
           type: 'line',
           data: expectedData,
           animationDuration: 2800,
           animationEasing: 'cubicInOut'
-        },
-        {
-          name: 'actual',
-          smooth: true,
-          type: 'line',
-          itemStyle: {
-            normal: {
-              color: '#3888fa',
-              lineStyle: {
-                color: '#3888fa',
-                width: 2
-              },
-              areaStyle: {
-                color: '#f3f8ff'
-              }
-            }
-          },
-          data: actualData,
-          animationDuration: 2800,
-          animationEasing: 'quadraticOut'
-        }]
+        }
+        // {
+        //   name: 'actual',
+        //   smooth: true,
+        //   type: 'line',
+        //   itemStyle: {
+        //     normal: {
+        //       color: '#3888fa',
+        //       lineStyle: {
+        //         color: '#3888fa',
+        //         width: 2
+        //       },
+        //       areaStyle: {
+        //         color: '#f3f8ff'
+        //       }
+        //     }
+        //   },
+        //   data: actualData,
+        //   animationDuration: 2800,
+        //   animationEasing: 'quadraticOut'
+        // }
+        ]
       })
     }
   }
