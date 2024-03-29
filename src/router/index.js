@@ -7,10 +7,14 @@ Vue.use(Router)
 import Layout from '@/layout'
 
 /* Router Modules */
-import componentsRouter from './modules/components'
-import chartsRouter from './modules/charts'
-import tableRouter from './modules/table'
-import nestedRouter from './modules/nested'
+import systemRouter from './modules/system'
+import financeRouter from './modules/finance'
+import integralRouter from './modules/integral'
+import mallRouter from './modules/mall'
+// import componentsRouter from './modules/components'
+// import chartsRouter from './modules/charts'
+// import tableRouter from './modules/table'
+// import nestedRouter from './modules/nested'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -90,6 +94,7 @@ export const constantRoutes = [
  * the routes that need to be dynamically loaded based on user roles
  */
 export const asyncRoutes = [
+  // 权限管理
   {
     path: '/permission',
     component: Layout,
@@ -97,7 +102,7 @@ export const asyncRoutes = [
     alwaysShow: true, // will always show the root menu
     name: 'Permission',
     meta: {
-      title: '管理员/权限',
+      title: '权限管理',
       icon: 'lock',
       roles: ['admin', 'editor'] // you can set roles in root nav
     },
@@ -126,6 +131,7 @@ export const asyncRoutes = [
   {
     path: '/icon',
     component: Layout,
+    // hidden: true,
     children: [
       {
         path: 'index',
@@ -137,14 +143,123 @@ export const asyncRoutes = [
   },
 
   /** when your routing map is too long, you can split it into small modules **/
-  componentsRouter,
-  chartsRouter,
-  nestedRouter,
-  tableRouter,
+  // 系统设置
+  systemRouter,
+
+  // CMS模块
+  {
+    path: '/cms',
+    component: Layout,
+    redirect: '/cms/page',
+    alwaysShow: true, // will always show the root menu
+    name: 'CMS',
+    meta: {
+      title: 'CMS模块',
+      icon: 'example'
+    },
+    children: [
+      {
+        path: 'page',
+        component: () => import('@/views/permission/role'),
+        name: 'CMSPage',
+        meta: {
+          title: '单页管理'
+        }
+      },
+      {
+        path: 'notice',
+        component: () => import('@/views/permission/page'),
+        name: 'CMSNotice',
+        meta: {
+          title: '公告管理'
+        }
+      }
+    ]
+  },
+
+  // 用户管理
+  {
+    path: '/user',
+    component: Layout,
+    redirect: '/user/set',
+    name: 'UserManage',
+    meta: {
+      title: '用户管理',
+      icon: 'user'
+    },
+    children: [
+      {
+        path: 'set',
+        component: () => import('@/views/permission/role'),
+        name: 'UserSet',
+        meta: {
+          title: '用户设置'
+        }
+      },
+      {
+        path: 'list',
+        component: () => import('@/views/permission/page'),
+        name: 'UserList',
+        meta: {
+          title: '用户列表'
+        }
+      }
+    ]
+  },
+
+  // 财务管理
+  financeRouter,
+  // 积分模块
+  integralRouter,
+  // 商城管理
+  mallRouter,
+
+  // 营销辅助
+  {
+    path: '/market',
+    component: Layout,
+    redirect: '/market/seckill',
+    name: 'UserManage',
+    meta: {
+      title: '营销辅助',
+      icon: 'chart'
+    },
+    children: [
+      {
+        path: 'seckill',
+        component: () => import('@/views/permission/role'),
+        name: 'SeckillSet',
+        meta: {
+          title: '秒杀设置'
+        }
+      },
+      {
+        path: 'rebate',
+        component: () => import('@/views/permission/page'),
+        name: 'PurchaseRebate',
+        meta: {
+          title: '购买返利'
+        }
+      },
+      {
+        path: 'rewards',
+        component: () => import('@/views/permission/page'),
+        name: 'ShareRewards',
+        meta: {
+          title: '分享奖励'
+        }
+      }
+    ]
+  },
+  // componentsRouter,
+  // chartsRouter,
+  // nestedRouter,
+  // tableRouter,
 
   {
     path: '/example',
     component: Layout,
+    hidden: true,
     redirect: '/example/list',
     name: 'Example',
     meta: {
@@ -177,6 +292,7 @@ export const asyncRoutes = [
   {
     path: '/tab',
     component: Layout,
+    hidden: true,
     children: [
       {
         path: 'index',
@@ -192,6 +308,7 @@ export const asyncRoutes = [
     component: Layout,
     redirect: 'noRedirect',
     name: 'ErrorPages',
+    hidden: true,
     meta: {
       title: 'Error Pages',
       icon: '404'
@@ -215,6 +332,7 @@ export const asyncRoutes = [
   {
     path: '/error-log',
     component: Layout,
+    hidden: true,
     children: [
       {
         path: 'log',
@@ -230,6 +348,7 @@ export const asyncRoutes = [
     component: Layout,
     redirect: '/excel/export-excel',
     name: 'Excel',
+    hidden: true,
     meta: {
       title: 'Excel',
       icon: 'excel'
@@ -267,6 +386,7 @@ export const asyncRoutes = [
     component: Layout,
     redirect: '/zip/download',
     alwaysShow: true,
+    hidden: true,
     name: 'Zip',
     meta: { title: 'Zip', icon: 'zip' },
     children: [
@@ -279,61 +399,24 @@ export const asyncRoutes = [
     ]
   },
 
-  {
-    path: '/pdf',
-    component: Layout,
-    redirect: '/pdf/index',
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/pdf/index'),
-        name: 'PDF',
-        meta: { title: 'PDF', icon: 'pdf' }
-      }
-    ]
-  },
-  {
-    path: '/pdf/download',
-    component: () => import('@/views/pdf/download'),
-    hidden: true
-  },
-
-  {
-    path: '/theme',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/theme/index'),
-        name: 'Theme',
-        meta: { title: 'Theme', icon: 'theme' }
-      }
-    ]
-  },
-
-  {
-    path: '/clipboard',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/clipboard/index'),
-        name: 'ClipboardDemo',
-        meta: { title: 'Clipboard', icon: 'clipboard' }
-      }
-    ]
-  },
-
-  {
-    path: 'external-link',
-    component: Layout,
-    children: [
-      {
-        path: 'https://github.com/PanJiaChen/vue-element-admin',
-        meta: { title: 'External Link', icon: 'link' }
-      }
-    ]
-  },
+  // {
+  //   path: '/pdf',
+  //   component: Layout,
+  //   redirect: '/pdf/index',
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       component: () => import('@/views/pdf/index'),
+  //       name: 'PDF',
+  //       meta: { title: 'PDF', icon: 'pdf' }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/pdf/download',
+  //   component: () => import('@/views/pdf/download'),
+  //   hidden: true
+  // },
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
