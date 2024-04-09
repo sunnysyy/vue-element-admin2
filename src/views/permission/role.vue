@@ -24,14 +24,14 @@
     <el-dialog :visible.sync="dialogVisible" :title="dialogType==='edit'?'修改角色':'添加角色'">
       <el-form :model="role" label-width="80px" label-position="left">
         <el-form-item label="名称">
-          <el-input v-model="role.name" placeholder="Role Name" />
+          <el-input v-model="role.name" placeholder="角色名称" />
         </el-form-item>
         <el-form-item label="描述">
           <el-input
             v-model="role.description"
             :autosize="{ minRows: 2, maxRows: 4}"
             type="textarea"
-            placeholder="Role Description"
+            placeholder="描述"
           />
         </el-form-item>
         <el-form-item label="权限">
@@ -47,7 +47,7 @@
         </el-form-item>
       </el-form>
       <div style="text-align:right;">
-        <el-button type="danger" @click="dialogVisible=false">取消</el-button>
+        <el-button @click="dialogVisible=false">取消</el-button>
         <el-button type="primary" @click="confirmRole">确定</el-button>
       </div>
     </el-dialog>
@@ -164,9 +164,9 @@ export default {
       })
     },
     handleDelete({ $index, row }) {
-      this.$confirm('Confirm to remove the role?', 'Warning', {
-        confirmButtonText: 'Confirm',
-        cancelButtonText: 'Cancel',
+      this.$confirm('删除无法恢复，是否继续？', '提示', {
+        confirmButtonText: '提交',
+        cancelButtonText: '取消',
         type: 'warning'
       })
         .then(async() => {

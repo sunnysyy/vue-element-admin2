@@ -8,6 +8,7 @@ import Layout from '@/layout'
 
 /* Router Modules */
 import systemRouter from './modules/system'
+import userRouter from './modules/user'
 import financeRouter from './modules/finance'
 import integralRouter from './modules/integral'
 import mallRouter from './modules/mall'
@@ -128,19 +129,19 @@ export const asyncRoutes = [
     ]
   },
 
-  {
-    path: '/icon',
-    component: Layout,
-    // hidden: true,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/icons/index'),
-        name: 'Icons',
-        meta: { title: 'Icons', icon: 'icon', noCache: true }
-      }
-    ]
-  },
+  // {
+  //   path: '/icon',
+  //   component: Layout,
+  //   // hidden: true,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       component: () => import('@/views/icons/index'),
+  //       name: 'Icons',
+  //       meta: { title: 'Icons', icon: 'icon', noCache: true }
+  //     }
+  //   ]
+  // },
 
   /** when your routing map is too long, you can split it into small modules **/
   // 系统设置
@@ -177,40 +178,74 @@ export const asyncRoutes = [
     ]
   },
 
-  // 用户管理
+  // 微信设置
   {
-    path: '/user',
+    path: '/wechat',
     component: Layout,
-    redirect: '/user/set',
-    name: 'UserManage',
+    redirect: '/wechat/set',
+    name: 'WechatSet',
     meta: {
-      title: '用户管理',
-      icon: 'user'
+      title: '微信设置',
+      icon: 'wechat'
     },
     children: [
       {
-        path: 'set',
+        path: 'wxKey',
         component: () => import('@/views/permission/role'),
-        name: 'UserSet',
+        name: 'wxKey',
         meta: {
-          title: '用户设置'
+          title: '小程序设置'
         }
       },
       {
-        path: 'list',
+        path: 'message',
         component: () => import('@/views/permission/page'),
-        name: 'UserList',
+        name: 'Message',
         meta: {
-          title: '用户列表'
+          title: '订阅'
         }
       }
     ]
   },
 
+  // 用户管理
+  userRouter,
+
   // 财务管理
   financeRouter,
   // 积分模块
   integralRouter,
+
+  // 短信设置
+  {
+    path: '/sms',
+    component: Layout,
+    redirect: '/sms/code',
+    name: 'SmsSet',
+    meta: {
+      title: '短信设置',
+      icon: 'message'
+    },
+    children: [
+      {
+        path: 'code',
+        component: () => import('@/views/permission/role'),
+        name: 'SmsCode',
+        meta: {
+          title: '验证码设置'
+        }
+      },
+      {
+        path: 'recode',
+        component: () => import('@/views/permission/page'),
+        name: 'SmsRecord',
+        meta: {
+          title: '短信记录'
+        }
+      }
+    ]
+  },
+
   // 商城管理
   mallRouter,
 
@@ -250,6 +285,18 @@ export const asyncRoutes = [
         }
       }
     ]
+  },
+
+  // 投票活动
+  {
+    path: '/vote',
+    component: Layout,
+    redirect: '/vote/activity',
+    name: 'VoteActivity',
+    meta: {
+      title: '投票活动',
+      icon: 'peoples'
+    }
   },
   // componentsRouter,
   // chartsRouter,
